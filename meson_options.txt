@@ -1,0 +1,6 @@
+option(
+    'with-libquadmath',
+    type: 'feature',
+    value: 'disabled',
+    description: 'enable support for libquadmath (TODO: require constexpr functions)',
+)
