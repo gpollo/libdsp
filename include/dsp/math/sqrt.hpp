@@ -29,7 +29,7 @@ constexpr long double sqrt<long double>(long double value) {
 
 #ifdef LIBDSP_LIBQUADMATH_SUPPORT
 template <>
-constexpr __float128 sqrt<__float128>(__float128 value) {
+__float128 sqrt<__float128>(__float128 value) {
     return sqrtq(value);
 }
 #endif /* LIBDSP_LIBQUADMATH_SUPPORT */

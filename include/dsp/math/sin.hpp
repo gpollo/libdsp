@@ -29,7 +29,7 @@ constexpr long double sin<long double>(long double value) {
 
 #ifdef LIBDSP_LIBQUADMATH_SUPPORT
 template <>
-constexpr __float128 sin<__float128>(__float128 value) {
+__float128 sin<__float128>(__float128 value) {
     return sinq(value);
 }
 #endif /* LIBDSP_LIBQUADMATH_SUPPORT */

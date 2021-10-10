@@ -29,7 +29,7 @@ constexpr long double tan<long double>(long double value) {
 
 #ifdef LIBDSP_LIBQUADMATH_SUPPORT
 template <>
-constexpr __float128 tan<__float128>(__float128 value) {
+__float128 tan<__float128>(__float128 value) {
     return tanq(value);
 }
 #endif /* LIBDSP_LIBQUADMATH_SUPPORT */

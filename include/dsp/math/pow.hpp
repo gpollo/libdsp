@@ -29,7 +29,7 @@ constexpr long double pow<long double>(long double x, long double y) {
 
 #ifdef LIBDSP_LIBQUADMATH_SUPPORT
 template <>
-constexpr __float128 pow<__float128>(__float128 x, __float128 y) {
+__float128 pow<__float128>(__float128 x, __float128 y) {
     return powq(x, y);
 }
 #endif /* LIBDSP_LIBQUADMATH_SUPPORT */
