@@ -12,3 +12,9 @@ test('dsp/integral',
         include_directories: libdsp_include,
     )
 )
+
+test('dsp/rate-limiter',
+    executable('test-rate-limiter', ['rate-limiter.cpp'],
+        include_directories: libdsp_include,
+    )
+)
