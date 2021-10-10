@@ -6,3 +6,9 @@ test('dsp/derivative',
         include_directories: libdsp_include,
     )
 )
+
+test('dsp/integral',
+    executable('test-integral', ['integral.cpp'],
+        include_directories: libdsp_include,
+    )
+)
