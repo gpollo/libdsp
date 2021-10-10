@@ -19,6 +19,12 @@ test('dsp/integral',
     )
 )
 
+test('dsp/partial-linear-map',
+    executable('test-partial-linear-map', ['partial-linear-map.cpp'],
+        include_directories: libdsp_include,
+    )
+)
+
 test('dsp/rate-limiter',
     executable('test-rate-limiter', ['rate-limiter.cpp'],
         include_directories: libdsp_include,
