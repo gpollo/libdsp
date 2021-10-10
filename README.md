@@ -26,11 +26,17 @@ The following table presents the available functor classes in this library.
 |          | `dsp::filter::windowed_sinc::high_pass` | Windowed-sinc digital filter.            |
 |          | `dsp::filter::moving_average`           | Fast moving average digital filter.      |
 |          | `dsp::filter::all_pass`                 | Placebo digital filter.                  |
-| Misc.    | `dsp::filter::derivative`               | Derivate the input signal.               |
-|          | `dsp::filter::integral`                 | Integrate the input signal.              |
-|          | `dsp::filter::pid`                      | Simple PID controller.                   |
-|          | `dsp::filter::maximizer`                | Track the highest value encountered.     |
-|          | `dsp::filter::minimizer`                | Track the lowest value encountered.      |
-|          | `dsp::filter::rate_limiter`             | Limit the rate of change of the signal.  |
-|          | `dsp::filter::partial_linear_map`       | Partial linear mapping between 2 points. |
-|          | `dsp::filter::delay_digital_signal`     | Delay rising/falling edge signal.        |
+| Misc.    | `dsp::derivative`                       | Derivate the input signal.               |
+|          | `dsp::integral`                         | Integrate the input signal.              |
+|          | `dsp::pid`                              | Simple PID controller.                   |
+|          | `dsp::maximizer`                        | Track the highest value encountered.     |
+|          | `dsp::minimizer`                        | Track the lowest value encountered.      |
+|          | `dsp::rate_limiter`                     | Limit the rate of change of the signal.  |
+|          | `dsp::partial_linear_map`               | Partial linear mapping between 2 points. |
+|          | `dsp::delay_digital_signal`             | Delay rising/falling edge signal.        |
+
+Filters are based on [1]. Other classes comes from different projects.
+
+## References
+
+[1] Smith, Steven W. "The scientist and engineer's guide to digital signal processing." (1997).
