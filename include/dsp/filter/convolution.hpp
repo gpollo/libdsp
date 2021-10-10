@@ -27,7 +27,7 @@ class convolution {
     std::optional<T> get() const;
 
    private:
-    static constexpr std::array<T, N> COEFFICIENTS = Coefficients::get();
+    const std::array<T, N> COEFFICIENTS = Coefficients::get();
     std::array<T, N> samples_{};
     std::atomic_bool ready_ = false;
 

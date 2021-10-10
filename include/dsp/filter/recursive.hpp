@@ -35,7 +35,7 @@ class recursive {
     std::optional<T> get() const;
 
    private:
-    static constexpr recursive_coefficients<T, AN, BN> COEFFICIENTS = Coefficients::get();
+    const recursive_coefficients<T, AN, BN> COEFFICIENTS = Coefficients::get();
     std::array<T, AN> input_samples_;
     std::array<T, BN> output_samples_;
     std::atomic_bool ready_ = false;
