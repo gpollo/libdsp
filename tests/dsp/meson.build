@@ -1,6 +1,12 @@
 subdir('filter')
 subdir('window')
 
+test('dsp/delay-digital-signal',
+    executable('test-delay-digital-signal', ['delay-digital-signal.cpp'],
+        include_directories: libdsp_include,
+    )
+)
+
 test('dsp/derivative',
     executable('test-derivative', ['derivative.cpp'],
         include_directories: libdsp_include,
