@@ -19,17 +19,17 @@ struct window_setting {
 
     static constexpr unsigned int SAMPLE_COUNT   = N;
     static constexpr float SAMPLING_FREQUENCY_HZ = static_cast<type>(SAMPLING_FREQUENCY);
-    static constexpr float CUTOFF_FREQUENCY_HZ   = static_cast<type>(10);
+    static constexpr float CUTOFF_FREQUENCY_HZ   = static_cast<type>(25);
 };
 
 int main() {
-    using window_blackman = window_setting<float, 7, dsp::window::blackman_coefficients<float, 7>>;
-    using window_hamming  = window_setting<float, 7, dsp::window::hamming_coefficients<float, 7>>;
-    using window_none     = window_setting<float, 7, dsp::window::none_coefficients<float, 7>>;
+    using window_blackman = window_setting<float, 37, dsp::window::blackman_coefficients<float, 37>>;
+    using window_hamming  = window_setting<float, 37, dsp::window::hamming_coefficients<float, 37>>;
+    using window_none     = window_setting<float, 37, dsp::window::none_coefficients<float, 37>>;
 
-    using filter_blackman = dsp::filter::windowed_sinc::high_pass<window_blackman>;
-    using filter_hamming  = dsp::filter::windowed_sinc::high_pass<window_hamming>;
-    using filter_none     = dsp::filter::windowed_sinc::high_pass<window_none>;
+    using filter_blackman = dsp::filter::windowed_sinc::low_pass<window_blackman>;
+    using filter_hamming  = dsp::filter::windowed_sinc::low_pass<window_hamming>;
+    using filter_none     = dsp::filter::windowed_sinc::low_pass<window_none>;
 
     auto gains_blackman = dsp::utils::frequency_response<POINT_COUNT, filter_blackman>(1.0, 50.0, SAMPLING_FREQUENCY);
     auto gains_hamming  = dsp::utils::frequency_response<POINT_COUNT, filter_hamming>(1.0, 50.0, SAMPLING_FREQUENCY);

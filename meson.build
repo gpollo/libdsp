@@ -22,14 +22,15 @@ endif
 
 libdsp_include = include_directories('include')
 
+############
+# examples #
+############
+
+subdir('examples')
+
 #########
 # tests #
 #########
-
-executable('test-filters', ['source/test-filters.cpp'],
-    include_directories: libdsp_include,
-    cpp_args: cpp_args,
-)
 
 subdir('tests')
 
@@ -39,9 +40,9 @@ subdir('tests')
 
 if build_machine.system() == 'linux'
     format_include = '`find include -type f -iname \'*.hpp\'`'
-    format_source = '`find source -type f -iname \'*.cpp\'`'
+    format_examples = '`find examples -type f -iname \'*.cpp\'`'
     format_tests = '`find tests -type f -iname \'*.cpp\'`'
-    format_files = '@0@ @1@ @2@'.format(format_include, format_source, format_tests)
+    format_files = '@0@ @1@ @2@'.format(format_include, format_examples, format_tests)
 
     run_target('format',
         command: [
@@ -60,9 +61,9 @@ endif
 
 if build_machine.system() == 'linux'
     tidy_include = '`find include -type f -iname \'*.hpp\'`'
-    tidy_source = '`find source -type f -iname \'*.cpp\'`'
-    tidy_tests = '`find source -type f -iname \'*.cpp\'`'
-    tidy_files = '@0@ @1@ @2@'.format(tidy_include, tidy_source, tidy_tests)
+    tidy_examples = '`find examples -type f -iname \'*.cpp\'`'
+    tidy_tests = '`find tests -type f -iname \'*.cpp\'`'
+    tidy_files = '@0@ @1@ @2@'.format(tidy_include, tidy_examples, tidy_tests)
 
     run_target('tidy',
         command: [
