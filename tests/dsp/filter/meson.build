@@ -1,3 +1,9 @@
+test('dsp/filter/all-pass',
+    executable('test-all-pass', ['all-pass.cpp'],
+        include_directories: libdsp_include,
+    )
+)
+
 test('dsp/filter/chebyshev',
     executable('test-chebyshev', ['chebyshev.cpp'],
         include_directories: libdsp_include,
