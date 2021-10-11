@@ -12,6 +12,26 @@ namespace dsp::math {
 template <typename T>
 constexpr T pow(T x, T y);
 
+constexpr int pow(int x, unsigned int y) {
+    int r = x;
+
+    if (y == 0) {
+        return 1;
+    }
+
+    for (unsigned int i = 0; i < y - 1; i++) {
+        r *= x;
+    }
+
+    return r;
+}
+
+static_assert(pow(-1, 0U) == 1);
+static_assert(pow(-1, 1U) == -1);
+static_assert(pow(-1, 2U) == 1);
+static_assert(pow(-1, 3U) == -1);
+static_assert(pow(-10, 3U) == -1000);
+
 template <>
 constexpr float pow<float>(float x, float y) {
     return powf(x, y);

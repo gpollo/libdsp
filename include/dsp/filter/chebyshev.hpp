@@ -26,6 +26,7 @@ struct chebyshev_coefficient {
     static_assert(POLE_COUNT >= 2, "pole count must not be below 2");
     static_assert(POLE_COUNT <= 20, "pole count must not be above 20");
     static_assert(std::is_scalar<type>::value, "type must be scalar");
+    /* TODO: additional asserts on cutoff, precision type, etc. */
 
     struct subroutine_results {
         type a0_;
@@ -133,8 +134,8 @@ struct chebyshev_coefficient {
         type sb = 0;
         for (unsigned int i = 0; i < 20; i++) {
             if (HighPass) {
-                sa = sa + a[i] * math::pow<type>(-1.0, i);
-                sb = sb + b[i] * math::pow<type>(-1.0, i);
+                sa = sa + a[i] * static_cast<type>(math::pow(-1, i));
+                sb = sb + b[i] * static_cast<type>(math::pow(-1, i));
             } else {
                 sa = sa + a[i];
                 sb = sb + b[i];
