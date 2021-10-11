@@ -7,8 +7,6 @@
 #include "dsp/window/hamming.hpp"
 #include "dsp/window/none.hpp"
 
-#include "dsp/filter/chebyshev.hpp"
-
 static constexpr float SAMPLING_FREQUENCY = 100;
 static constexpr unsigned int POINT_COUNT = 300;
 
