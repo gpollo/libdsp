@@ -1,3 +1,4 @@
+subdir('chebyshev')
 subdir('windowed-sinc')
 
 executable('example-crop', ['crop.cpp'],
