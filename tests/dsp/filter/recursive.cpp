@@ -24,19 +24,19 @@ struct test_coefficients {
         return coefficients;
     }
 };
-
+#include <iostream>
 static void test_simple_inputs() {
     dsp::filter::recursive<float, 1, 4, test_coefficients<float>> recursive;
 
     assert(!recursive(10).has_value());
     assert(!recursive(10).has_value());
     assert(!recursive(10).has_value());
-    assert(almost_equal(recursive(10).value_or(-1), 150.0F));
-    assert(almost_equal(recursive(10).value_or(-1), 430.0F));
-    assert(almost_equal(recursive(10).value_or(-1), 1410.0F));
-    assert(almost_equal(recursive(20).value_or(-1), 4780.0F));
-    assert(almost_equal(recursive(0).value_or(-1), 16260.0F));
-    assert(almost_equal(recursive(0).value_or(-1), 54650.0F));
+    assert(almost_equal(recursive(10).value_or(-1), 10.0F));
+    assert(almost_equal(recursive(10).value_or(-1), 30.0F));
+    assert(almost_equal(recursive(10).value_or(-1), 100.0F));
+    assert(almost_equal(recursive(20).value_or(-1), 350.0F));
+    assert(almost_equal(recursive(0).value_or(-1), 1170.0F));
+    assert(almost_equal(recursive(0).value_or(-1), 3940.0F));
 }
 
 int main() {

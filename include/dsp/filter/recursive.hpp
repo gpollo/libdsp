@@ -51,7 +51,7 @@ std::optional<T> recursive<T, AN, BN, Coefficients>::operator()(T sample) {
 
     bool ready = ready_;
     if (!ready) {
-        output_samples_[current_output_sample_] = sample;
+        output_samples_[current_output_sample_] = 0;
 
         if (AN > BN) {
             if (current_input_sample_ == AN - 1) {
