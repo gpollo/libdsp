@@ -14,6 +14,7 @@ libquadmath_dep = cpp_compiler.find_library('quadmath', required: get_option('wi
 libquadmath_is_enabled = libquadmath_dep.found()
 if libquadmath_is_enabled
     cpp_args += '-DLIBDSP_LIBQUADMATH_SUPPORT'
+    cpp_args += '-fext-numeric-literals'
 endif
 
 ##########
@@ -21,6 +22,10 @@ endif
 ##########
 
 libdsp_include = include_directories('include')
+
+libdsp_dep = declare_dependency(
+    include_directories: libdsp_include,
+)
 
 ############
 # examples #
