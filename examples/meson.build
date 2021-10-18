@@ -13,6 +13,10 @@ executable('example-minimizer-maximizer', ['minimizer-maximizer.cpp'],
     include_directories: libdsp_include,
 )
 
+executable('example-pid', ['pid.cpp'],
+    include_directories: libdsp_include,
+)
+
 executable('example-rate-limiter', ['rate-limiter.cpp'],
     include_directories: libdsp_include,
 )
