@@ -13,8 +13,8 @@ class derivative {
 
    private:
     bool ready_ = false;
-    T last_x_;
-    T last_y_;
+    T last_x_   = static_cast<T>(0);
+    T last_y_   = static_cast<T>(0);
 };
 
 template <typename T>
