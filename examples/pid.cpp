@@ -7,6 +7,7 @@
 #include "dsp/pid.hpp"
 #include "dsp/rate-limiter.hpp"
 #include "dsp/window/hamming.hpp"
+#include "dsp/windup/none.hpp"
 
 template <typename T>
 class mass_spring_damper {
@@ -40,8 +41,8 @@ class filter_settings {
     using type                                   = T;
     using window                                 = dsp::window::hamming_coefficients<T, N>;
     static constexpr unsigned int SAMPLE_COUNT   = N;
-    static constexpr float SAMPLING_FREQUENCY_HZ = static_cast<T>(1000);
-    static constexpr float CUTOFF_FREQUENCY_HZ   = static_cast<T>(10);
+    static constexpr float SAMPLING_FREQUENCY_HZ = 1000.0F;
+    static constexpr float CUTOFF_FREQUENCY_HZ   = 10.0F;
 };
 
 int main() {
@@ -50,12 +51,14 @@ int main() {
     std::mt19937 random_generator{random_device()};
     std::normal_distribution<double> noise{0.0, 0.001};
 
+    using windup          = dsp::windup::none<double>;
+    using placebo_filter  = dsp::filter::all_pass<double>;
     using low_pass_filter = dsp::filter::windowed_sinc::low_pass<filter_settings<double, 19>>;
 
-    dsp::pid<double, dsp::filter::all_pass<double>> control1(500.0, 0.0, 0.0);
-    dsp::pid<double, dsp::filter::all_pass<double>> control2(350.0, 100.0, 50.0);
-    dsp::pid<double, dsp::filter::all_pass<double>> control3(350.0, 0.0, 100.0);
-    dsp::pid<double, low_pass_filter> control4(350.0, 0.0, 100.0);
+    dsp::pid<double, windup, placebo_filter> control1(500.0, 0.0, 0.0);
+    dsp::pid<double, windup, placebo_filter> control2(350.0, 100.0, 50.0);
+    dsp::pid<double, windup, placebo_filter> control3(350.0, 0.0, 100.0);
+    dsp::pid<double, windup, low_pass_filter> control4(350.0, 0.0, 100.0);
 
     dsp::rate_limiter<double> limiter1(-10.0, 10.0, 0.00001);
     dsp::rate_limiter<double> limiter2(-10.0, 10.0, 0.00001);
@@ -77,8 +80,8 @@ int main() {
     std::cout << ">title-6=$K_p=350$, $K_i=\\phantom{0}\\phantom{0}0$, $K_d=100$" << std::endl;
     std::cout << ">title-7=$K_p=350$, $K_i=\\phantom{0}\\phantom{0}0$, $K_d=100$, filtered" << std::endl;
 
-    double time   = -20;
-    double target = 0.0F;
+    double time   = -20.0;
+    double target = 0.0;
 
     double error1 = 0.0;
     double error2 = 0.0;

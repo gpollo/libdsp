@@ -11,11 +11,22 @@ namespace dsp {
 /**
  * This functor integrates the input signal.
  *
- * TODO: handle integrator windup
+ * The integrator windup template parameter `W` must provide the following types/method:
+ *
+ *    using type = ...;
+ *    type operator()(type timestamp, type error, type integrator_value);
+ *
+ * The derivative input filter template parameter `F` must provide the following types/method:
+ *
+ *    using type = ...;
+ *    std::optional<type> operator()(type sample);
  */
-template <typename T, typename F>
+template <typename T, typename W, typename F>
 class pid {
    public:
+    static_assert(std::is_same<T, typename W::type>::value, "integrator windup must use the same type");
+    static_assert(std::is_same<T, typename F::type>::value, "derivative filter must use the same type");
+
     pid(T k_p, T k_i, T k_d);
     std::optional<T> operator()(T timestamp, T error);
     std::optional<T> operator()(std::optional<T> timestamp, std::optional<T> error);
@@ -27,14 +38,15 @@ class pid {
 
     dsp::integral<T> integrate_;
     dsp::derivative<T> derivate_;
+    W integrator_windup_;
     F derivative_low_pass_filter_;
 };
 
-template <typename T, typename F>
-pid<T, F>::pid(T k_p, T k_i, T k_d) : k_p_(k_p), k_i_(k_i), k_d_(k_d) {}
+template <typename T, typename W, typename F>
+pid<T, W, F>::pid(T k_p, T k_i, T k_d) : k_p_(k_p), k_i_(k_i), k_d_(k_d) {}
 
-template <typename T, typename F>
-std::optional<T> pid<T, F>::operator()(T timestamp, T error) {
+template <typename T, typename W, typename F>
+std::optional<T> pid<T, W, F>::operator()(T timestamp, T error) {
     auto error_area_opt = integrate_(timestamp, error);
     if (!error_area_opt.has_value()) {
         return {};
@@ -60,8 +72,8 @@ std::optional<T> pid<T, F>::operator()(T timestamp, T error) {
     return p + i + d;
 }
 
-template <typename T, typename F>
-std::optional<T> pid<T, F>::operator()(std::optional<T> timestamp, std::optional<T> error) {
+template <typename T, typename W, typename F>
+std::optional<T> pid<T, W, F>::operator()(std::optional<T> timestamp, std::optional<T> error) {
     if (timestamp.has_value() && error.has_value()) {
         return (*this)(timestamp.value(), error.value());
     }
