@@ -4,3 +4,17 @@ option(
     value: 'disabled',
     description: 'enable support for libquadmath (TODO: require constexpr functions)',
 )
+
+option(
+    'build-examples',
+    type: 'boolean',
+    value: 'true',
+    description: 'whether to build the examples or not',
+)
+
+option(
+    'build-tests',
+    type: 'boolean',
+    value: 'true',
+    description: 'whether to build the tests or not',
+)

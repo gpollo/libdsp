@@ -31,13 +31,17 @@ libdsp_dep = declare_dependency(
 # examples #
 ############
 
-subdir('examples')
+if get_option('build-examples')
+    subdir('examples')
+endif
 
 #########
 # tests #
 #########
 
-subdir('tests')
+if get_option('build-tests')
+    subdir('tests')
+endif
 
 #################
 # format target #
