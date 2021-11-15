@@ -20,7 +20,7 @@ struct sinc_coefficients {
     static_assert(SAMPLE_COUNT % 2 == 1, "sample count must be an odd number");
 
     static constexpr std::array<type, SAMPLE_COUNT> get() {
-        std::array<type, SAMPLE_COUNT> coefficients;
+        std::array<type, SAMPLE_COUNT> coefficients{};
         type sum = 0;
 
         for (unsigned int i = 0; i < SAMPLE_COUNT; i++) {
@@ -55,7 +55,7 @@ struct windowed_sinc_coefficients {
         const std::array<type, SAMPLE_COUNT> WINDOW_COEFFICIENTS = window::get();
         const std::array<type, SAMPLE_COUNT> SINC_COEFFICIENTS   = sinc::get();
 
-        std::array<type, SAMPLE_COUNT> coefficients;
+        std::array<type, SAMPLE_COUNT> coefficients{};
         type sum = 0;
 
         for (unsigned int i = 0; i < SAMPLE_COUNT; i++) {
