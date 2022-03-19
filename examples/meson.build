@@ -24,3 +24,7 @@ executable('example-pid', ['pid.cpp'],
 executable('example-rate-limiter', ['rate-limiter.cpp'],
     include_directories: libdsp_include,
 )
+
+executable('example-moving-average', ['moving-average.cpp'],
+    include_directories: libdsp_include,
+)

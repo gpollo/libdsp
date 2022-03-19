@@ -15,6 +15,8 @@ namespace dsp::filter {
 template <typename T, unsigned int N>
 class moving_average {
    public:
+    using type = T;
+
     void next(T sample);
     std::optional<T> operator()(T sample);
     std::optional<T> operator()(std::optional<T> sample);
