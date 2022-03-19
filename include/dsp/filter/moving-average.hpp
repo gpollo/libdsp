@@ -30,7 +30,7 @@ class moving_average {
 };
 
 template <typename T, unsigned int N>
-std::optional<T> moving_average<T, N>::operator()(T sample) {
+void moving_average<T, N>::next(T sample) {
     bool all_sample_received = ready_;
 
     current_sum_ = current_sum_ + sample;
@@ -48,13 +48,17 @@ std::optional<T> moving_average<T, N>::operator()(T sample) {
     }
 
     if (!all_sample_received) {
-        return {};
+        return;
     }
 
     current_output_ = current_sum_ / N;
     ready_.store(true, std::memory_order_release);
+}
 
-    return current_output_;
+template <typename T, unsigned int N>
+std::optional<T> moving_average<T, N>::operator()(T sample) {
+    next(sample);
+    return get();
 }
 
 template <typename T, unsigned int N>
